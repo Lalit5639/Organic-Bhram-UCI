@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhram™ | Bottle check</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/organic-hinglish.css">
+</head>
+<body class="verify-page">
+  <header class="site-header solid">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">B</span>
+      <span><strong>BHRAM™</strong></span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Ghar</a><a href="index.html#bhram">Bhram™</a><a href="index.html#purity">Quality</a><a class="nav-cta" href="verify.html">Bottle check</a>
+    </nav>
+  </header>
+
+  <main class="verify-main">
+    <div class="verify-decoration"></div>
+    <div class="verify-card">
+      <p class="eyebrow">BHRAM™ BOTTLE CHECK</p>
+      <h1>Apni bottle<br><em>check karein.</em></h1>
+      <p>Bhram™ pack par diya gaya batch ya product number enter karein. Yeh batch lookup abhi demo hai. Home page ka QR official FoSCoS registration details kholta hai.</p>
+      <form id="verify-form">
+        <label for="code">Batch / product number</label>
+        <div class="verify-input"><input id="code" placeholder="Jaise: BRM-2026-0001" required><button type="submit">Check karein</button></div>
+      </form>
+      <div id="verify-result" class="verify-result" hidden></div>
+      <a class="back-link" href="index.html">← Bhram™ par wapas</a>
+    </div>
+  </main>
+  <script src="js/verify.js"></script>
+</body>
+</html>

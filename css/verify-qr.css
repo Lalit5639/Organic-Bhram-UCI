@@ -1,0 +1,17 @@
+.qr-link {
+  display: block;
+  width: 140px;
+  margin: 0 auto 8px;
+  background: #fff;
+}
+
+.qr-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.qr-box > span {
+  display: block;
+  line-height: 1.5;
+}

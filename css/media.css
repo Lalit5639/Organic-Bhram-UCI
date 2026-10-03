@@ -1,0 +1,12 @@
+.media-image video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #1d120c;
+}
+
+.media-shade,
+.media-label {
+  pointer-events: none;
+}
