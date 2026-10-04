@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bhram honey ka order dein. Delivery details bharein aur cash on delivery chunein.">
+  <title>Order karein | Bhram™ Honey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/organic-hinglish.css">
+  <link rel="stylesheet" href="css/order.css">
+</head>
+<body class="order-page">
+  <div class="announcement">BHRAM™ <span>•</span> PHOOLON SE SHEESHI TAK <span>•</span> PRAKRITI KI MITHAAS</div>
+  <header class="site-header solid order-header">
+    <a class="brand" href="index.html" aria-label="Bhram homepage">
+      <span class="brand-mark">B</span>
+      <span><strong>BHRAM™</strong></span>
+    </a>
+    <a class="order-back-link" href="index.html#bhram">← Products par wapas jaayein</a>
+  </header>
+
+  <main class="order-main">
+    <div class="order-intro">
+      <p class="eyebrow">BHRAM™ HONEY</p>
+      <h1>Apna order <em>place karein.</em></h1>
+      <p>Delivery details bharein. PDF receipt share menu se WhatsApp par bhejein.</p>
+    </div>
+
+    <form class="order-layout" id="order-form">
+      <section class="order-card customer-card" aria-labelledby="delivery-heading">
+        <div class="order-section-heading">
+          <span class="order-step">01</span>
+          <div><h2 id="delivery-heading">Delivery details</h2><p>Jis address par order chahiye, woh batayein.</p></div>
+        </div>
+
+        <label class="form-field">
+          <span>Aapka poora naam <b>*</b></span>
+          <input name="name" type="text" autocomplete="name" maxlength="100" placeholder="Jaise: Rahul Kumar" required>
+        </label>
+
+        <div class="form-row">
+          <label class="form-field">
+            <span>Mobile number <b>*</b></span>
+            <input name="phone" type="tel" inputmode="numeric" autocomplete="tel" pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10-digit mobile number" title="10 digit ka valid Indian mobile number daalein" required>
+          </label>
+          <label class="form-field">
+            <span>Username <small>(optional)</small></span>
+            <input name="username" type="text" autocomplete="username" maxlength="50" placeholder="Aapka username">
+          </label>
+        </div>
+
+        <label class="form-field">
+          <span>Poora address <b>*</b></span>
+          <textarea name="address" rows="3" autocomplete="street-address" maxlength="300" placeholder="House/flat no., gali, area" required></textarea>
+        </label>
+        <label class="form-field">
+          <span>Landmark <small>(optional)</small></span>
+          <input name="landmark" type="text" maxlength="120" placeholder="Paas ki koi pehchaan">
+        </label>
+
+        <div class="form-row">
+          <label class="form-field">
+            <span>PIN code <b>*</b></span>
+            <input id="postal-code" name="postalCode" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{6}" maxlength="6" placeholder="6-digit PIN code" required>
+          </label>
+          <label class="form-field">
+            <span>District <b>*</b></span>
+            <input id="district" name="district" type="text" autocomplete="address-level2" maxlength="100" placeholder="Aapka district" required>
+          </label>
+        </div>
+        <label class="form-field">
+          <span>State <b>*</b></span>
+          <input id="state" name="state" type="text" autocomplete="address-level1" maxlength="100" placeholder="Aapka state" required>
+        </label>
+
+        <div class="location-panel">
+          <div class="location-copy">
+            <strong>Current location pin</strong>
+            <span>GPS se location lein; district aur PIN code milne par fill ho jayenge.</span>
+          </div>
+          <button class="btn btn-location" id="location-button" type="button">Location lein <span aria-hidden="true">⌖</span></button>
+          <p id="location-status" class="location-status" role="status" aria-live="polite"></p>
+          <a id="map-link" class="map-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps par location dekhein ↗</a>
+          <input id="coordinates" name="coordinates" type="hidden">
+        </div>
+      </section>
+
+      <aside class="order-card summary-card" aria-labelledby="summary-heading">
+        <div class="order-section-heading">
+          <span class="order-step">02</span>
+          <div><h2 id="summary-heading">Order summary</h2><p>Pack aur quantity chunein.</p></div>
+        </div>
+
+        <label class="form-field">
+          <span>Honey pack <b>*</b></span>
+          <select id="product-size" name="productSize" required>
+            <option value="250g">250 g — ₹380</option>
+            <option value="500g">500 g — ₹690</option>
+            <option value="1kg">1 kg — ₹1,350</option>
+          </select>
+        </label>
+        <label class="form-field quantity-field">
+          <span>Quantity <b>*</b></span>
+          <input id="quantity" name="quantity" type="number" min="1" max="20" value="1" required>
+        </label>
+
+        <div class="price-total"><span>Total amount</span><strong id="order-total">₹380</strong></div>
+
+        <fieldset class="payment-choice">
+          <legend>Payment method</legend>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="Cash on Delivery" checked>
+            <span><strong>Cash on Delivery (COD)</strong><small>Parcel milne par cash payment karein.</small></span>
+          </label>
+          <p class="payment-note">Filhaal Cash on Delivery available hai. UPI/QR payment UPI ID milne ke baad joda jayega.</p>
+        </fieldset>
+
+        <button class="btn btn-primary order-submit" type="submit">PDF receipt share karein <span aria-hidden="true">→</span></button>
+        <p class="order-privacy">PDF seedha device ke share menu mein khulegi. WhatsApp chunein, phir owner ka chat select karke Send karein. Details website par save nahi hoti.</p>
+        <p id="order-status" class="order-status" role="status" aria-live="polite"></p>
+      </aside>
+    </form>
+  </main>
+
+  <footer class="order-footer"><a href="index.html">BHRAM™</a> <span>•</span> Prakriti ki mithaas, dil se.</footer>
+  <script src="js/order.js"></script>
+</body>
+</html>
