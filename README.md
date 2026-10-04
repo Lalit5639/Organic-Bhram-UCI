@@ -5,7 +5,7 @@
 - Bhram™ hero product using the supplied product image
 - Product sizes: 250g / 500g / 1kg
 - Customer order form with delivery address, PIN/district lookup, optional current map pin and Cash on Delivery
-- Order receipts are generated as PDFs and shared from supported browsers; no order backend or UPI payment is configured
+- Order details open in a prefilled WhatsApp message; no order backend or UPI payment is configured
 - Honey journey timeline
 - Purity & lab section
 - Our honey collection
@@ -33,7 +33,7 @@ Connect the batch verification form to a backend/database for live product-level
 
 The order form uses the Indian PIN-code API and OpenStreetMap reverse geocoding only when customers enter a full PIN code or request their current location. Customers can review the location pin in Google Maps before including it in their WhatsApp order. Add a verified UPI ID before enabling UPI/QR payments.
 
-Order receipts are generated as PDF files in the browser and passed directly to the device share sheet. The customer chooses WhatsApp and the owner's chat to send it. File sharing requires browser support (typically a mobile browser on HTTPS); unsupported browsers show a clear message instead of downloading the receipt. The static site cannot force WhatsApp to open or send the file in the background.
+Order details open as a receipt-style, prefilled WhatsApp text message with an order ID, date, item summary, COD payment and delivery sections. WhatsApp supports headings and emphasis, but the message is still text rather than a PDF attachment. The customer reviews and sends it from WhatsApp. Sending a PDF directly requires a WhatsApp Business API backend.
 
 
 ## Premium media + 2D manufacturing section
