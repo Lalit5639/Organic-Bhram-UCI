@@ -18,6 +18,76 @@ document.addEventListener("keydown",event=>{if(event.key==="Escape")setMenuOpen(
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")}),{threshold:.12});
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
+const timeline=document.querySelector("#honey-timeline");
+const timelineToggle=document.querySelector(".timeline-toggle");
+const timelineSlider=timeline?.closest(".timeline-slider");
+if(timeline&&timelineToggle&&timelineSlider){
+  const timelineItems=[...timeline.querySelectorAll(".timeline-item")];
+  const timelinePosition=timelineSlider.querySelector(".timeline-position");
+  const timelinePrevious=timelineSlider.querySelector(".timeline-prev");
+  const timelineNext=timelineSlider.querySelector(".timeline-next");
+  const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
+  let timelineVisible=false;
+  let userPaused=false;
+  let currentTimelineStep=0;
+  let timelineTimer=null;
+  let exitTimer=null;
+
+  function updateTimelineAnimation(){
+    const canAnimate=timelineVisible&&!userPaused&&!reducedMotion.matches;
+    if(!canAnimate){
+      clearInterval(timelineTimer);
+      timelineTimer=null;
+      return;
+    }
+    if(timelineTimer)return;
+    timelineTimer=setInterval(()=>showTimelineStep(currentTimelineStep+1,1),3000);
+  }
+
+  function showTimelineStep(index,direction){
+    const nextIndex=(index+timelineItems.length)%timelineItems.length;
+    const currentItem=timelineItems[currentTimelineStep];
+    const nextItem=timelineItems[nextIndex];
+    clearTimeout(exitTimer);
+    currentItem.classList.remove("is-active","is-exiting");
+    currentItem.classList.add("is-exiting");
+    nextItem.classList.remove("is-exiting");
+    if(direction<0)nextItem.classList.add("from-left");
+    else nextItem.classList.remove("from-left");
+    nextItem.classList.add("is-active");
+    currentItem.setAttribute("aria-hidden","true");
+    nextItem.removeAttribute("aria-hidden");
+    currentTimelineStep=nextIndex;
+    timelinePosition.textContent=`${String(nextIndex+1).padStart(2,"0")} / ${String(timelineItems.length).padStart(2,"0")}`;
+    exitTimer=setTimeout(()=>currentItem.classList.remove("is-exiting"),550);
+  }
+
+  function setTimelinePaused(paused){
+    userPaused=paused;
+    timelineToggle.textContent=paused?"Resume timeline":"Pause timeline";
+    timelineToggle.setAttribute("aria-label",paused?"Resume timeline motion":"Pause timeline motion");
+    timelineToggle.setAttribute("aria-pressed",String(paused));
+    updateTimelineAnimation();
+  }
+
+  timeline.classList.add("is-sequencing");
+  const timelineObserver=new IntersectionObserver(entries=>{
+    timelineVisible=entries[0].isIntersecting;
+    updateTimelineAnimation();
+  },{threshold:.1});
+  timelineObserver.observe(timeline);
+  timelineToggle.addEventListener("click",()=>setTimelinePaused(!userPaused));
+  timelinePrevious.addEventListener("click",()=>showTimelineStep(currentTimelineStep-1,-1));
+  timelineNext.addEventListener("click",()=>showTimelineStep(currentTimelineStep+1,1));
+  timeline.addEventListener("keydown",event=>{
+    if(event.key==="ArrowLeft"){showTimelineStep(currentTimelineStep-1,-1)}
+    if(event.key==="ArrowRight"){showTimelineStep(currentTimelineStep+1,1)}
+  });
+  reducedMotion.addEventListener("change",updateTimelineAnimation);
+  timelineToggle.setAttribute("aria-label","Pause timeline motion");
+  updateTimelineAnimation();
+}
+
 const heroSlides=[...document.querySelectorAll(".hero-slide")];
 const heroDots=[...document.querySelectorAll(".hero-dot")];
 const prevBtn=document.querySelector(".carousel-prev");

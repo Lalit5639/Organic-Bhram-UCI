@@ -121,14 +121,21 @@
           <p class="eyebrow">MADHUMAKKHI SE SHEESHI TAK</p>
           <h2 style="font-size: clamp(38px, 4vw, 58px)">फूल से शुरू,<br><em>Bhram™ तक.</em></h2>
         </div>
-        <div class="timeline" aria-label="Honey journey timeline" tabindex="0">
-          <div class="timeline-line"></div>
-          <article class="timeline-item reveal"><span>01</span><div><h3>फूल</h3><p>Phoolon aur nectar se kahani ka pehla panna khulta hai.</p></div></article>
-          <article class="timeline-item reveal"><span>02</span><div><h3>मधुमक्खी </h3><p>Bee nectar jama karti hai, apne Prakartii safar par.</p></div></article>
-          <article class="timeline-item reveal"><span>03</span><div><h3>Apiary</h3><p>Hive aur beekeeper, dono is kahani ka hissa hain.</p></div></article>
-          <article class="timeline-item reveal"><span>04</span><div><h3>पैदावार</h3><p>Chhatte se shahad ikattha karke agle stage ke liye taiyaar hota hai.</p></div></article>
-          <article class="timeline-item reveal"><span>05</span><div><h3>गुणवत्ता</h3><p>Verified quality records available hone par yahan milenge.</p></div></article>
-          <article class="timeline-item reveal"><span>06</span><div><h3>Bottle</h3><p>Safar ke baad Bhram™ aapke ghar tak pahunchta hai.</p></div></article>
+        <div class="timeline-slider">
+          <div class="timeline" id="honey-timeline" role="region" aria-roledescription="carousel" aria-label="Honey journey timeline" tabindex="0">
+            <article class="timeline-item is-active" role="group" aria-roledescription="slide" aria-label="Step 1 of 6"><div class="timeline-marker"><span>01</span><svg class="journey-icon flower-icon" viewBox="0 0 80 80" aria-hidden="true"><path class="flower-stem" d="M40 41v28m0-15c-11-1-16-6-17-14 9 0 15 4 17 14Zm0 8c10-1 15-6 16-13-9 0-14 4-16 13Z"/><g class="flower-head"><circle cx="40" cy="25" r="7"/><circle cx="40" cy="12" r="7"/><circle cx="52" cy="25" r="7"/><circle cx="40" cy="38" r="7"/><circle cx="28" cy="25" r="7"/><circle class="flower-center" cx="40" cy="25" r="5"/></g></svg></div><div><h3>फूल</h3><p>Phoolon aur nectar se kahani ka pehla panna khulta hai.</p></div></article>
+            <article class="timeline-item" role="group" aria-roledescription="slide" aria-label="Step 2 of 6" aria-hidden="true"><div class="timeline-marker"><span>02</span><svg class="journey-icon bee-icon" viewBox="0 0 80 80" aria-hidden="true"><g class="bee-wings"><ellipse cx="34" cy="24" rx="9" ry="13"/><ellipse cx="49" cy="24" rx="9" ry="13"/></g><g class="bee-body"><ellipse cx="41" cy="43" rx="22" ry="14"/><path d="M34 30v26m13-26v26" stroke="#edf0e5" stroke-width="5"/><circle cx="57" cy="40" r="2" class="bee-eye"/><path d="m19 43-8-6v12z"/></g><path d="m56 30 5-8m-1 10 9-5" class="bee-antenna"/></svg></div><div><h3>मधुमक्खी </h3><p>Bee nectar jama karti hai, apne Prakartii safar par.</p></div></article>
+            <article class="timeline-item" role="group" aria-roledescription="slide" aria-label="Step 3 of 6" aria-hidden="true"><div class="timeline-marker"><span>03</span><svg class="journey-icon hive-icon" viewBox="0 0 80 80" aria-hidden="true"><path d="M18 33h44v8H18zm4 11h36v8H22zm5 11h26v8H27zM24 28l16-11 16 11z"/><path d="M35 63h10v6H35z" class="hive-door"/></svg></div><div><h3>Apiary</h3><p>Hive aur beekeeper, dono is kahani ka hissa hain.</p></div></article>
+            <article class="timeline-item" role="group" aria-roledescription="slide" aria-label="Step 4 of 6" aria-hidden="true"><div class="timeline-marker"><span>04</span><svg class="journey-icon harvest-icon" viewBox="0 0 80 80" aria-hidden="true"><path d="M30 19h20v8H30zm-5 9h30l-3 36H28z"/><path d="M31 43h28l-2 20H33z" class="honey-fill"/><path class="honey-drip" d="M58 35v10c0 5-7 5-7 0v-5"/></svg></div><div><h3>पैदावार</h3><p>Chhatte se shahad ikattha karke agle stage ke liye taiyaar hota hai.</p></div></article>
+            <article class="timeline-item" role="group" aria-roledescription="slide" aria-label="Step 5 of 6" aria-hidden="true"><div class="timeline-marker"><span>05</span><svg class="journey-icon quality-icon" viewBox="0 0 80 80" aria-hidden="true"><path d="M40 13 62 21v17c0 14-9 23-22 30-13-7-22-16-22-30V21z" class="quality-shield"/><path class="quality-check" d="m29 40 7 7 15-16"/></svg></div><div><h3>गुणवत्ता</h3><p>Verified quality records available hone par yahan milenge.</p></div></article>
+            <article class="timeline-item" role="group" aria-roledescription="slide" aria-label="Step 6 of 6" aria-hidden="true"><div class="timeline-marker"><span>06</span><svg class="journey-icon bottle-icon" viewBox="0 0 80 80" aria-hidden="true"><path d="M34 14h12v10l5 6v34a5 5 0 0 1-5 5H34a5 5 0 0 1-5-5V30l5-6z"/><path d="M30 43h20v16H30z" class="bottle-label"/><path d="M35 19h10" class="bottle-cap"/><path d="M34 47h12m-12 5h8" class="bottle-mark"/></svg></div><div><h3>Bottle</h3><p>Safar ke baad Bhram™ aapke ghar tak pahunchta hai.</p></div></article>
+          </div>
+          <div class="timeline-controls">
+            <button class="timeline-prev" type="button" aria-label="Previous journey step">←</button>
+            <span class="timeline-position" aria-hidden="true">01 / 06</span>
+            <button class="timeline-next" type="button" aria-label="Next journey step">→</button>
+            <button class="timeline-toggle" type="button" aria-controls="honey-timeline" aria-pressed="false">Pause timeline</button>
+          </div>
         </div>
       </div>
     </section>

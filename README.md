@@ -6,7 +6,7 @@
 - Product sizes: 250g / 500g / 1kg
 - Customer order form with delivery address, PIN/district lookup, optional current map pin and Cash on Delivery
 - Order details open in a prefilled WhatsApp message; no order backend or UPI payment is configured
-- Honey journey timeline
+- Auto-playing one-by-one honey journey slider with animated step icons, pause/step controls and reduced-motion support
 - Purity & lab section
 - Our honey collection
 - Asli vs Nakli education section
