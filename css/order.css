@@ -1,19 +1,19 @@
 .order-page {
   min-height: 100vh;
-  background: #f7f6ef;
+  background: #f8f4e7;
 }
 
 .order-header {
   position: relative;
   top: auto;
-  color: #29382d;
+  color: #123f30;
   padding: 16px max(5%, calc((100% - 1120px) / 2));
-  border-bottom: 1px solid rgba(38, 61, 50, .09);
+  border-bottom: 1px solid rgba(213, 165, 50, .28);
 }
 
 .order-back-link {
   font-size: 13px;
-  color: #52634f;
+  color: #123f30;
 }
 
 .order-main {
@@ -58,10 +58,10 @@
 
 .order-card {
   padding: clamp(20px, 3vw, 32px);
-  border: 1px solid rgba(38, 61, 50, .1);
+  border: 1px solid rgba(213, 165, 50, .32);
   border-radius: 14px;
-  background: #fffefa;
-  box-shadow: 0 14px 36px rgba(38, 61, 50, .06);
+  background: #fff;
+  box-shadow: 0 14px 36px rgba(18, 63, 48, .08);
 }
 
 .order-section-heading {
@@ -78,7 +78,7 @@
   height: 36px;
   place-items: center;
   border-radius: 50%;
-  background: #edf0e5;
+  background: #f4df9f;
   color: var(--green);
   font-size: 12px;
   font-weight: 700;
@@ -130,7 +130,7 @@
   border-radius: 6px;
   outline: none;
   background: #fff;
-  color: #263d32;
+  color: #123f30;
   font: inherit;
   font-size: 13px;
 }
@@ -143,8 +143,8 @@
 .form-field input:focus,
 .form-field textarea:focus,
 .form-field select:focus {
-  border-color: #718b62;
-  box-shadow: 0 0 0 3px rgba(88, 117, 78, .1);
+  border-color: #d5a532;
+  box-shadow: 0 0 0 3px rgba(213, 165, 50, .16);
 }
 
 .location-panel {
@@ -153,9 +153,9 @@
   align-items: center;
   gap: 8px 14px;
   padding: 16px;
-  border: 1px solid #e2e7d9;
+  border: 1px solid #ead9a6;
   border-radius: 8px;
-  background: #f8faf4;
+  background: #fffaf0;
 }
 
 .location-copy {
@@ -177,9 +177,9 @@
 .btn-location {
   min-height: 40px;
   padding: 9px 12px;
-  border: 1px solid #879679;
+  border: 1px solid #d5a532;
   background: transparent;
-  color: #405c47;
+  color: #123f30;
   cursor: pointer;
 }
 
@@ -195,7 +195,7 @@
 }
 
 .map-link {
-  color: #405c47;
+  color: #123f30;
   font-weight: 700;
 }
 
@@ -216,7 +216,7 @@
 }
 
 .price-total strong {
-  color: #263d32;
+  color: #123f30;
   font-size: 24px;
 }
 
@@ -237,14 +237,14 @@
   align-items: flex-start;
   gap: 10px;
   padding: 14px;
-  border: 1px solid #b7c5a9;
+  border: 1px solid #ead9a6;
   border-radius: 7px;
-  background: #f8faf4;
+  background: #fffaf0;
 }
 
 .payment-option input {
   margin: 3px 0 0;
-  accent-color: #58754e;
+  accent-color: #123f30;
 }
 
 .payment-option span {
@@ -293,14 +293,14 @@
 
 .order-footer {
   padding: 20px;
-  border-top: 1px solid rgba(38, 61, 50, .1);
+  border-top: 1px solid rgba(213, 165, 50, .28);
   color: #737b6d;
   font-size: 11px;
   text-align: center;
 }
 
 .order-footer a {
-  color: #405c47;
+  color: #123f30;
   font-weight: 700;
 }
 
