@@ -23,36 +23,42 @@
 }
 
 .timeline.is-sequencing {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   overflow: hidden;
+  perspective: 1400px;
+  perspective-origin: center;
 }
 
 .timeline.is-sequencing .timeline-item {
   grid-area: 1 / 1;
   width: 100%;
-  padding: 8px 0;
+  padding: 0;
   opacity: 0;
   visibility: hidden;
-  transform: translateX(72px);
-  transition: opacity .5s ease, transform .5s ease, visibility 0s linear .5s;
+  transform: translate3d(42px, 0, -120px) rotateY(13deg) scale(.96);
+  backface-visibility: hidden;
+  transition: opacity .65s ease, transform .75s cubic-bezier(.2,.75,.2,1), visibility 0s linear .75s;
 }
 
 .timeline.is-sequencing .timeline-item.is-active {
   z-index: 1;
   opacity: 1;
   visibility: visible;
-  transform: translateX(0);
+  transform: translate3d(0, 0, 0) rotateY(0) scale(1);
   transition-delay: 0s;
 }
 
 .timeline.is-sequencing .timeline-item.from-left:not(.is-active) {
-  transform: translateX(-72px);
+  transform: translate3d(-42px, 0, -120px) rotateY(-13deg) scale(.96);
 }
 
 .timeline.is-sequencing .timeline-item.is-exiting {
+  z-index: 0;
   visibility: visible;
-  transform: translateX(-72px);
+  opacity: 0;
+  transform: translate3d(-32px, 0, -100px) rotateY(-12deg) scale(.97);
 }
 
 .timeline-item > div {
@@ -60,6 +66,8 @@
 }
 
 .timeline-item .timeline-marker {
+  position: relative;
+  transform-style: preserve-3d;
   display: flex;
   align-items: center;
   gap: 18px;
@@ -94,6 +102,7 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2.5;
+  transform-style: preserve-3d;
 }
 
 .journey-icon .flower-stem,
@@ -158,6 +167,10 @@
   transform-origin: center bottom;
 }
 
+.timeline-item.is-active .journey-icon {
+  animation: journey-icon-float 3.8s ease-in-out infinite;
+}
+
 @keyframes flower-bloom {
   from { transform: scale(.86) rotate(-8deg); }
   to { transform: scale(1.08) rotate(8deg); }
@@ -188,6 +201,11 @@
 @keyframes bottle-arrive {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
+}
+
+@keyframes journey-icon-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -8px; }
 }
 
 .timeline-item h3 {
@@ -239,7 +257,7 @@
 
 @media (max-width: 560px) {
   .timeline {
-    margin-top: 36px;
+    margin-top: 28px;
   }
 
   .timeline-item h3 {
@@ -248,6 +266,8 @@
 
   .timeline-controls {
     gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .timeline-controls button {
@@ -258,6 +278,7 @@
 @media (prefers-reduced-motion: reduce) {
   .timeline.is-sequencing .timeline-item {
     transition: none;
+    transform: none;
   }
 
   .journey-icon,
@@ -273,5 +294,9 @@
 
   .timeline-item.is-active .quality-check {
     stroke-dashoffset: 0;
+  }
+
+  .timeline-item.is-active .journey-icon {
+    animation: none;
   }
 }
