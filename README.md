@@ -17,7 +17,7 @@
 - Scroll reveal animations
 
 ## Important
-The current build includes a frontend lead-capture popup connected to Google Sheets through `google-sheet-apps-script.js`. Deploy that script as a Google Apps Script web app with access set to **Anyone**, then make sure `UCI_SHEET_WEB_APP_URL` in `index.html` points to that deployment. The popup reports success only after the web app confirms the row was written.
+The current build includes a frontend lead-capture popup connected to Google Sheets through `google-sheet-apps-script.js`. Deploy that script as a Google Apps Script web app with access set to **Anyone**, then make sure `UCI_SHEET_WEB_APP_URL` in `index.html` points to that deployment. The popup submits leads with a cross-origin `no-cors` request because browser security prevents GitHub Pages from reading the Apps Script response; its confirmation means the request completed, not that the sheet response was verified.
 
 Replace demo content with the final:
 - approved brand copy

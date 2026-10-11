@@ -1098,43 +1098,19 @@ function closeWelcomePopup(){
 }
 
 function submitLeadToGoogleSheet(data){
-  return new Promise(function(resolve, reject){
-    var callbackName = 'uciSheetCallback_' + Date.now() + '_' + Math.random().toString(36).slice(2);
-    var script = document.createElement('script');
-    var timeout = window.setTimeout(function(){
-      cleanup();
-      reject(new Error('The Google Sheet did not respond. Please try again.'));
-    }, 15000);
+  var query = new URLSearchParams({
+    name: data.name,
+    mobile: data.mobile,
+    page: data.page,
+    submittedAt: data.submittedAt
+  });
+  var submitUrl = UCI_SHEET_WEB_APP_URL + (UCI_SHEET_WEB_APP_URL.indexOf('?') === -1 ? '?' : '&') + query.toString();
 
-    function cleanup(){
-      window.clearTimeout(timeout);
-      delete window[callbackName];
-      script.remove();
-    }
-
-    window[callbackName] = function(response){
-      cleanup();
-      if(response && response.ok){
-        resolve();
-      }else{
-        reject(new Error(response && response.error ? response.error : 'Could not save your details.'));
-      }
-    };
-
-    script.onerror = function(){
-      cleanup();
-      reject(new Error('Could not connect to Google Sheets. Please try again.'));
-    };
-
-    var query = new URLSearchParams({
-      name: data.name,
-      mobile: data.mobile,
-      page: data.page,
-      submittedAt: data.submittedAt,
-      callback: callbackName
-    });
-    script.src = UCI_SHEET_WEB_APP_URL + (UCI_SHEET_WEB_APP_URL.indexOf('?') === -1 ? '?' : '&') + query.toString();
-    document.head.appendChild(script);
+  return fetch(submitUrl, {
+    method: 'GET',
+    mode: 'no-cors',
+    credentials: 'omit',
+    cache: 'no-store'
   });
 }
 
@@ -1180,15 +1156,15 @@ if(welcomeForm){
 
     if(welcomeSubmit){
       welcomeSubmit.disabled = true;
-      welcomeSubmit.textContent = 'Saving...';
+      welcomeSubmit.textContent = 'Submitting...';
     }
     if(welcomeStatus){
-      welcomeStatus.textContent = 'Saving your details...';
+      welcomeStatus.textContent = 'Submitting your details...';
     }
 
     submitLeadToGoogleSheet(leadData).then(function(){
       if(welcomeStatus){
-        welcomeStatus.textContent = 'Saved. Thank you.';
+        welcomeStatus.textContent = 'Details submitted. Thank you.';
       }
       closeWelcomePopup();
       if(welcomeSubmit){
