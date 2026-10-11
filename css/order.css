@@ -1,6 +1,6 @@
 .order-page {
   min-height: 100vh;
-  background: #f8f4e7;
+  background: #fff;
 }
 
 .order-header {
@@ -34,6 +34,7 @@
 
 .order-intro h1 {
   margin: 0;
+  color: var(--green);
   font-family: var(--serif);
   font-size: clamp(40px, 6vw, 62px);
   line-height: 1.2;
@@ -86,6 +87,7 @@
 
 .order-section-heading h2 {
   margin: 0;
+  color: var(--green);
   font-size: 20px;
   line-height: 1.4;
 }

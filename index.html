@@ -256,25 +256,20 @@ nav{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:cente
 section{padding:34px 0}
 .headline{font-size:clamp(1.9rem,4vw,3rem);margin:0 0 18px;letter-spacing:-.05em}
 .subhead{color:var(--mut);margin:0 0 26px;max-width:760px}
-.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
-.product-card{position:relative;display:flex;flex-direction:column;background:linear-gradient(180deg,#fffefa 0%,#f8f5eb 100%);border:1px solid rgba(119,133,91,.28);border-radius:20px;overflow:hidden;box-shadow:0 18px 42px rgba(36,63,45,.08);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
-.product-card:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,#355b43,#c99a4a,#355b43);opacity:.9}
-.product-card:hover{transform:translateY(-6px);border-color:rgba(201,154,74,.72);box-shadow:0 26px 56px rgba(36,63,45,.14)}
-.product-card .img-box{position:relative;height:248px;background:#f4e5ad;display:flex;align-items:center;justify-content:center;padding:0;border-bottom:1px solid rgba(213,165,50,.26);overflow:hidden}
-.product-card .img-box:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,28,21,.02),rgba(5,28,21,.08));pointer-events:none}
-.product-card .img-box img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;transition:transform .35s ease,filter .35s ease}
-.product-card:hover .img-box img{transform:scale(1.045)}
-.product-card .body{display:flex;flex:1;flex-direction:column;padding:22px 20px 20px}
-.product-card .meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
-.product-card .meta span{display:inline-flex;align-items:center;min-height:28px;color:#123f30;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-.product-card .meta span:first-child{padding:7px 10px;border-radius:999px;background:rgba(18,63,48,.08);border:1px solid rgba(18,63,48,.1)}
-.product-card .meta span:last-child{color:#0b2f24}
-.product-card h3{margin:0 0 9px;font-size:1.25rem;line-height:1.2;color:#092c22}
-.product-card p{margin:0;color:var(--mut);font-size:.95rem;line-height:1.6}
-.price-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:20px}
-.price{font-weight:800;color:#a97932;font-size:1.22rem;letter-spacing:.01em}
-.add-btn{background:linear-gradient(180deg,#eac978,#c99a4a);border:none;border-radius:999px;min-width:86px;padding:11px 18px;font-weight:800;color:#26392d;cursor:pointer;box-shadow:0 10px 20px rgba(168,126,57,.2);transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
-.add-btn:hover{transform:translateY(-1px);box-shadow:0 16px 28px rgba(213,165,50,.32)}
+.product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:stretch;max-width:780px;margin:0 auto}
+.product-card{position:relative;display:flex;flex-direction:column;background:linear-gradient(180deg,#f6f1e7 0%,#f0e8d8 100%);border:1px solid rgba(76,98,82,.08);border-radius:20px;overflow:hidden;box-shadow:0 14px 28px rgba(40,49,38,.08);transition:transform .25s ease,box-shadow .25s ease}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 20px 36px rgba(40,49,38,.12)}
+.product-card .img-box{position:relative;display:flex;align-items:center;justify-content:center;height:260px;padding:26px 12px 8px;background:linear-gradient(180deg,#f8f4ec 0%,#efe4c8 100%)}
+.product-card .img-box:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 15%,rgba(255,255,255,.5),transparent 30%)}
+.product-card .img-box img{position:relative;z-index:1;width:82%;height:88%;object-fit:contain;filter:drop-shadow(0 12px 18px rgba(0,0,0,.18))}
+.product-card .body{display:flex;flex:1;flex-direction:column;align-items:center;padding:18px 16px 20px;text-align:center;background:rgba(255,255,255,.06)}
+.product-card h3{margin:0;font-size:1.05rem;line-height:1.35;color:#1e3129;font-weight:700;letter-spacing:-.02em}
+.product-card .status{margin:10px 0 0;color:#2a3d2f;font-size:.92rem;font-weight:600;opacity:.9}
+.product-card .status.is-price{color:#1b352d;font-weight:700;font-size:1.04rem}
+.product-card .order-btn{display:block;margin-top:18px;width:100%;border:none;border-radius:999px;padding:14px 16px;background:linear-gradient(180deg,#365e46,#1d3f2d);color:#fdf8ed;font-weight:700;cursor:pointer;letter-spacing:.02em;box-shadow:0 12px 22px rgba(21,57,39,.2);transition:transform .2s ease,box-shadow .2s ease;text-align:center;text-decoration:none}
+.product-card .order-btn:hover{transform:translateY(-1px);box-shadow:0 16px 28px rgba(21,57,39,.28)}
+.product-card .product-badge{position:absolute;left:14px;top:14px;z-index:2;padding:7px 10px;border-radius:999px;background:linear-gradient(180deg,#eb5f55,#d94a3d);color:#fff;font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 10px 18px rgba(217,74,61,.18)}
+.product-card .product-badge.is-muted{background:rgba(0,0,0,.08);color:#e7e4dd}
 .promo{background:linear-gradient(135deg,#fffefa,#f1ead7);border-radius:26px;padding:22px;border:1px solid rgba(119,133,91,.25)}
 .promo-box{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center}
 .promo-box h3{margin:0 0 8px;font-size:clamp(1.7rem,2vw,2.5rem)}
@@ -451,9 +446,54 @@ footer:before{content:"";position:absolute;inset:0;background:radial-gradient(ci
   .process-scene.active,.process-progress span{animation:none;transition:none}
   .flower-group,.bee-fly,.bee-dots circle,.hives,.beekeeper-2d,.extractor,.honey-stream,.bottle-2d,.lab-tube,.scan-beam{animation:none}
 }
+.welcome-popup{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(8,41,31,.72);backdrop-filter:blur(10px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility .25s ease}
+.welcome-popup.is-open{opacity:1;visibility:visible;pointer-events:auto}
+.welcome-dialog{position:relative;width:min(100%,440px);overflow:hidden;border:1px solid rgba(213,165,50,.42);border-radius:22px;background:linear-gradient(180deg,#fffefa,#f8f1dd);box-shadow:0 30px 80px rgba(8,41,31,.35);padding:28px;color:#26392d;text-align:center}
+.welcome-dialog:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% -20%,rgba(213,165,50,.28),transparent 42%);pointer-events:none}
+.welcome-dialog>*{position:relative;z-index:1}
+.welcome-close{position:absolute;top:14px;right:14px;z-index:2;width:36px;height:36px;border:1px solid rgba(53,91,67,.22);border-radius:50%;background:rgba(255,255,255,.72);color:#294b38;font-size:1.4rem;line-height:1;cursor:pointer}
+.welcome-logo{width:92px;height:92px;margin:0 auto 14px;border-radius:50%;padding:5px;background:linear-gradient(135deg,#d5a532,#f4d565);box-shadow:0 0 0 3px rgba(213,165,50,.22),0 16px 28px rgba(36,63,45,.16)}
+.welcome-logo img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#fff}
+.welcome-dialog h2{margin:0;font-family:var(--serif);font-size:clamp(1.85rem,7vw,2.65rem);line-height:1.05;color:#123f30}
+.welcome-dialog p{margin:10px auto 20px;max-width:320px;color:#667265;font-size:.94rem}
+.welcome-form{display:grid;gap:13px;text-align:left}
+.welcome-field{display:grid;gap:7px}
+.welcome-field span{font-weight:700;font-size:.84rem;color:#294b38}
+.welcome-field input{width:100%;border:1px solid rgba(53,91,67,.22);border-radius:14px;background:#fff;padding:13px 14px;color:#26392d;font:500 .95rem Poppins,system-ui,sans-serif;outline:none}
+.welcome-field input:focus{border-color:#c99a4a;box-shadow:0 0 0 4px rgba(201,154,74,.16)}
+.welcome-submit{width:100%;margin-top:5px;border:0;border-radius:999px;background:linear-gradient(180deg,#edcf88,#c99a4a);color:#102f24;padding:13px 20px;font-weight:800;font-size:.96rem;cursor:pointer;box-shadow:0 14px 26px rgba(201,154,74,.28)}
+.welcome-submit:disabled{cursor:wait;opacity:.72}
+.welcome-note{margin:10px 0 0;color:#697568;font-size:.78rem;text-align:center}
+.welcome-status{min-height:18px;margin:4px 0 0;color:#697568;font-size:.78rem;text-align:center}
+body.popup-lock{overflow:hidden}
+@media(max-width:560px){
+  .welcome-dialog{padding:24px 18px;border-radius:18px}
+  .welcome-logo{width:78px;height:78px}
+}
 </style>
 </head>
 <body>
+<div class="welcome-popup" id="welcomePopup" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+  <div class="welcome-dialog">
+    <button class="welcome-close" id="welcomeClose" type="button" aria-label="Close welcome popup">&times;</button>
+    <div class="welcome-logo"><img src="assets/logo home.png" alt="UCI logo"></div>
+    <h2 id="welcomeTitle">Welcome to UCI</h2>
+    <p>Please enter your name and mobile number to continue.</p>
+    <form class="welcome-form" id="welcomeForm">
+      <label class="welcome-field">
+        <span>Name</span>
+        <input id="visitorName" name="visitorName" type="text" autocomplete="name" maxlength="80" placeholder="Enter your name" required>
+      </label>
+      <label class="welcome-field">
+        <span>Mobile No.</span>
+        <input id="visitorMobile" name="visitorMobile" type="tel" inputmode="numeric" autocomplete="tel" pattern="[0-9]{10}" maxlength="10" placeholder="10 digit mobile number" title="Please enter a valid 10 digit mobile number" required>
+      </label>
+      <button class="welcome-submit" type="submit">Continue</button>
+      <p class="welcome-status" id="welcomeStatus" role="status" aria-live="polite"></p>
+      <p class="welcome-note">Your details stay in this browser only.</p>
+    </form>
+  </div>
+</div>
 <header>
   <div class="w">
     <nav id="primary-nav">
@@ -523,34 +563,45 @@ footer:before{content:"";position:absolute;inset:0;background:radial-gradient(ci
       <p class="tag" style="margin-bottom:10px;color:var(--olive);letter-spacing:.12em;text-transform:uppercase;font-size:.75rem;font-weight:700;">Bhram™ Collection</p>
       <h2 class="headline">Pure honey for daily Wellness</h2>
       <p class="subhead">Carefully collected from healthy flowers and packed for families who want authenticity, taste, and trust in every spoon.</p>
+
       <div class="product-grid">
         <article class="product-card">
-          <div class="img-box"><img src="assets/1.png" alt="Bhram honey jar"></div>
+          <span class="product-badge is-muted">New</span>
+          <div class="img-box"><img src="assets/1.png" alt="Bhram Honey"></div>
           <div class="body">
-            <div class="meta"><span>Best Seller</span><span>250 g</span></div>
-            <h3>Bhram™ Honey</h3>
-            <p>Golden, floral, and naturally</p>
-            <div class="price-row"><div class="price">₹380</div><button class="add-btn" data-size="250g">Order</button></div>
+            <h3>Bhram Honey</h3>
+            <p class="status">250 Gm / 380 Rs.</p>
+            <a class="order-btn" href="order.html?size=250g">अभी ऑर्डर करें</a>
           </div>
         </article>
 
         <article class="product-card">
-          <div class="img-box"><img src="assets/2.png" alt="Bhram honey pack"></div>
+          <span class="product-badge is-muted">New</span>
+          <div class="img-box"><img src="assets/2.png" alt="Bhram Curd"></div>
           <div class="body">
-            <div class="meta"><span>Popular</span><span>500 g</span></div>
-            <h3>Classic Jar</h3>
-            <p>Perfect for daily use, tea, desserts.</p>
-            <div class="price-row"><div class="price">₹690</div><button class="add-btn" data-size="500g">Order</button></div>
+            <h3>Bhram Honey</h3>
+            <p class="status">500 Gm / 690 Rs.</p>
+            <a class="order-btn" href="order.html?size=500g">अभी ऑर्डर करें</a>
           </div>
         </article>
 
-        <article class="product-card">
-          <div class="img-box"><img src="assets/4.png" alt="Bhram premium honey pack"></div>
+        <!-- <article class="product-card">
+          <span class="product-badge">BEST SELLER</span>
+          <div class="img-box"><img src="assets/3.png" alt="Bhram Natural Raw Forest Honey"></div>
           <div class="body">
-            <div class="meta"><span>Premium</span><span>1 kg</span></div>
-            <h3>Family Pack</h3>
-            <p>Large-sized pack made for homes.</p>
-            <div class="price-row"><div class="price">₹1,350</div><button class="add-btn" data-size="1kg">Order</button></div>
+            <h3>Bhram Natural Raw Forest Honey</h3>
+            <p class="status is-price">Rs. 400.00</p>
+            <button class="order-btn" type="button">अभी ऑर्डर करें</button>
+          </div>
+        </article> -->
+
+        <article class="product-card">
+          <span class="product-badge is-muted">Fresh</span>
+          <div class="img-box"><img src="assets/4.png" alt="Bhram Dairy Pure Sars Oil"></div>
+          <div class="body">
+            <h3>Bhram Dairy Pure Sars Oil</h3>
+            <p class="status">1 KG / 1380 Rs.</p>
+            <a class="order-btn" href="order.html?size=1kg">अभी ऑर्डर करें</a>
           </div>
         </article>
       </div>
@@ -1020,6 +1071,109 @@ footer:before{content:"";position:absolute;inset:0;background:radial-gradient(ci
 <a class="wa" href="https://wa.me/919027330373" aria-label="WhatsApp">💬</a>
 
 <script>
+var welcomePopup = document.getElementById('welcomePopup');
+var welcomeForm = document.getElementById('welcomeForm');
+var welcomeClose = document.getElementById('welcomeClose');
+var visitorName = document.getElementById('visitorName');
+var visitorMobile = document.getElementById('visitorMobile');
+var welcomeStatus = document.getElementById('welcomeStatus');
+var welcomeSubmit = welcomeForm ? welcomeForm.querySelector('.welcome-submit') : null;
+var UCI_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyrCYAt-REvPc8q81i6muIi0WIgufI0kPTpl6YBnY7Z4xKv5JWdyaJSnmPek-KjNXPa6w/exec';
+
+function openWelcomePopup(){
+  if(!welcomePopup) return;
+  welcomePopup.classList.add('is-open');
+  document.body.classList.add('popup-lock');
+  window.setTimeout(function(){
+    if(visitorName){
+      visitorName.focus();
+    }
+  }, 120);
+}
+
+function closeWelcomePopup(){
+  if(!welcomePopup) return;
+  welcomePopup.classList.remove('is-open');
+  document.body.classList.remove('popup-lock');
+}
+
+function submitLeadToGoogleSheet(data){
+  var query = new URLSearchParams(data).toString();
+  var separator = UCI_SHEET_WEB_APP_URL.indexOf('?') === -1 ? '?' : '&';
+  var submitUrl = UCI_SHEET_WEB_APP_URL + separator + query + '&cacheBust=' + Date.now();
+  localStorage.setItem('uciLastSheetSubmitUrl', submitUrl);
+  return fetch(submitUrl, {
+    method: 'GET',
+    mode: 'no-cors',
+    credentials: 'omit',
+    cache: 'no-store'
+  });
+}
+
+window.addEventListener('load', openWelcomePopup);
+
+if(welcomeClose){
+  welcomeClose.addEventListener('click', closeWelcomePopup);
+}
+
+if(visitorMobile){
+  visitorMobile.addEventListener('input', function(){
+    this.value = this.value.replace(/\D/g, '').slice(0, 10);
+  });
+}
+
+if(welcomeForm){
+  welcomeForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    if(!welcomeForm.checkValidity()){
+      welcomeForm.reportValidity();
+      return;
+    }
+    var leadData = {
+      name: visitorName.value.trim(),
+      mobile: visitorMobile.value.trim(),
+      page: window.location.href,
+      submittedAt: new Date().toISOString()
+    };
+    localStorage.setItem('uciVisitorName', leadData.name);
+    localStorage.setItem('uciVisitorMobile', leadData.mobile);
+
+    if(!UCI_SHEET_WEB_APP_URL){
+      if(welcomeStatus){
+        welcomeStatus.textContent = 'Google Sheet Web App URL is missing.';
+      }
+      return;
+    }
+
+    if(welcomeSubmit){
+      welcomeSubmit.disabled = true;
+      welcomeSubmit.textContent = 'Saving...';
+    }
+    if(welcomeStatus){
+      welcomeStatus.textContent = 'Saving your details...';
+    }
+
+    submitLeadToGoogleSheet(leadData).then(function(){
+      if(welcomeStatus){
+        welcomeStatus.textContent = 'Saved. Thank you.';
+      }
+      closeWelcomePopup();
+      if(welcomeSubmit){
+        welcomeSubmit.disabled = false;
+        welcomeSubmit.textContent = 'Continue';
+      }
+    }).catch(function(){
+      if(welcomeStatus){
+        welcomeStatus.textContent = 'Could not save. Please check deployment access.';
+      }
+      if(welcomeSubmit){
+        welcomeSubmit.disabled = false;
+        welcomeSubmit.textContent = 'Continue';
+      }
+    });
+  });
+}
+
 var count = 0;
 var cartBtn = document.getElementById('cartBtn');
 var cc = document.getElementById('cc');

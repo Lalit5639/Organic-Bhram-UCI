@@ -1,11 +1,11 @@
 :root {
-  --gold: #b58a43;
-  --gold2: #d2aa5f;
+  --gold: #c69a3a;
+  --gold2: #e0b64d;
   --brown: #263d32;
   --brown2: #405c47;
-  --cream: #edf0e5;
-  --ivory: #faf9f3;
-  --green: #58754e;
+  --cream: #f5f7f2;
+  --ivory: #fff;
+  --green: #5b8745;
   --line: rgba(38, 61, 50, .16);
   --serif: "Noto Serif Devanagari", Georgia, serif;
   --sans: "DM Sans", "Noto Sans Devanagari", sans-serif;
@@ -394,9 +394,63 @@ body {
   letter-spacing: 0;
 }
 
+body,
+.order-page,
+.verify-main {
+  background-color: #fff;
+}
+
+.hero-home {
+  background-color: #fff;
+  background-image:
+    radial-gradient(ellipse at 76% 53%, rgba(198, 154, 58, .1), transparent 34%),
+    linear-gradient(115deg, #fff 0%, #fff 72%, #fbfcf8 100%);
+}
+
+.hero-home h1,
+.statement h2,
+.section-heading h2,
+.product-copy h2,
+.purity-copy h2,
+.story-copy h2,
+.verify-card h1 {
+  color: var(--green);
+}
+
+.dark :is(.section-heading h2, .compare h2, .contact h2) {
+  color: #f7f4e9;
+}
+
+.dark :is(.section-heading h2, .compare h2, .contact h2) em {
+  color: var(--gold2);
+}
+
+.statement,
+.bhram,
+.purity,
+.story,
+.journey,
+.health,
+.media-story {
+  background-color: #fff;
+}
+
+.btn-primary,
+.site-header-home .nav .nav-cta {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #263d32;
+}
+
+.btn-primary:hover,
+.site-header-home .nav .nav-cta:hover {
+  border-color: var(--gold2);
+  background: var(--gold2);
+}
+
 @media (max-width: 900px) {
   .site-header-home.open .nav {
-    background: #faf9f3;
+    background: #fff;
   }
 }
 
