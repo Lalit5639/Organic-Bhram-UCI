@@ -3,29 +3,21 @@ const SHEET_NAME = 'Sheet1';
 const HEADERS = ['Date', 'Name', 'Mobile', 'Page', 'Submitted At'];
 
 function doGet(e) {
-  if (e && e.parameter && e.parameter.name && e.parameter.mobile) {
-    return saveLead(e.parameter);
+  const data = e && e.parameter ? e.parameter : {};
+  const callback = data.callback || '';
+
+  if (!data.name && !data.mobile) {
+    return createResponse({
+      ok: true,
+      message: 'UCI Google Sheet web app is live.'
+    }, callback);
   }
 
-  return ContentService
-    .createTextOutput('UCI Google Sheet web app is live. Add ?name=Test&mobile=9999999999 to test sheet entry.')
-    .setMimeType(ContentService.MimeType.TEXT);
+  return saveLead(data, callback);
 }
 
 function doPost(e) {
-  const lock = LockService.getScriptLock();
-  lock.waitLock(10000);
-
-  try {
-    const data = getRequestData(e);
-    return saveLead(data);
-  } catch (error) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ok: false, error: String(error)}))
-      .setMimeType(ContentService.MimeType.JSON);
-  } finally {
-    lock.releaseLock();
-  }
+  return saveLead(getRequestData(e), '');
 }
 
 function getRequestData(e) {
@@ -44,23 +36,59 @@ function getRequestData(e) {
   return {};
 }
 
-function saveLead(data) {
-  const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
-  const sheet = spreadsheet.getSheetByName(SHEET_NAME) || spreadsheet.getSheets()[0];
+function saveLead(data, callback) {
+  const lock = LockService.getScriptLock();
 
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(HEADERS);
+  try {
+    const name = String(data.name || '').trim();
+    const mobile = String(data.mobile || '').trim();
+
+    if (!name || name.length > 80) {
+      return createResponse({ok: false, error: 'Please enter a valid name.'}, callback);
+    }
+
+    if (!/^\d{10}$/.test(mobile)) {
+      return createResponse({ok: false, error: 'Please enter a valid 10-digit mobile number.'}, callback);
+    }
+
+    lock.waitLock(10000);
+
+    const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
+    const sheet = spreadsheet.getSheetByName(SHEET_NAME) || spreadsheet.getSheets()[0];
+
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow(HEADERS);
+    }
+
+    sheet.appendRow([
+      new Date(),
+      name,
+      mobile,
+      String(data.page || '').slice(0, 2048),
+      String(data.submittedAt || '').slice(0, 64)
+    ]);
+
+    return createResponse({ok: true}, callback);
+  } catch (error) {
+    console.error(error);
+    return createResponse({ok: false, error: 'Could not save your details. Please try again.'}, callback);
+  } finally {
+    if (lock.hasLock()) {
+      lock.releaseLock();
+    }
+  }
+}
+
+function createResponse(payload, callback) {
+  const json = JSON.stringify(payload);
+
+  if (/^uciSheetCallback_[A-Za-z0-9_]+$/.test(callback)) {
+    return ContentService
+      .createTextOutput(callback + '(' + json + ');')
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
   }
 
-  sheet.appendRow([
-    new Date(),
-    data.name || '',
-    data.mobile || '',
-    data.page || '',
-    data.submittedAt || ''
-  ]);
-
   return ContentService
-    .createTextOutput(JSON.stringify({ok: true}))
+    .createTextOutput(json)
     .setMimeType(ContentService.MimeType.JSON);
 }

@@ -490,7 +490,7 @@ body.popup-lock{overflow:hidden}
       </label>
       <button class="welcome-submit" type="submit">Continue</button>
       <p class="welcome-status" id="welcomeStatus" role="status" aria-live="polite"></p>
-      <p class="welcome-note">Your details stay in this browser only.</p>
+      <p class="welcome-note">Your details will be shared with UCI through Google Sheets.</p>
     </form>
   </div>
 </div>
@@ -1098,15 +1098,43 @@ function closeWelcomePopup(){
 }
 
 function submitLeadToGoogleSheet(data){
-  var query = new URLSearchParams(data).toString();
-  var separator = UCI_SHEET_WEB_APP_URL.indexOf('?') === -1 ? '?' : '&';
-  var submitUrl = UCI_SHEET_WEB_APP_URL + separator + query + '&cacheBust=' + Date.now();
-  localStorage.setItem('uciLastSheetSubmitUrl', submitUrl);
-  return fetch(submitUrl, {
-    method: 'GET',
-    mode: 'no-cors',
-    credentials: 'omit',
-    cache: 'no-store'
+  return new Promise(function(resolve, reject){
+    var callbackName = 'uciSheetCallback_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+    var script = document.createElement('script');
+    var timeout = window.setTimeout(function(){
+      cleanup();
+      reject(new Error('The Google Sheet did not respond. Please try again.'));
+    }, 15000);
+
+    function cleanup(){
+      window.clearTimeout(timeout);
+      delete window[callbackName];
+      script.remove();
+    }
+
+    window[callbackName] = function(response){
+      cleanup();
+      if(response && response.ok){
+        resolve();
+      }else{
+        reject(new Error(response && response.error ? response.error : 'Could not save your details.'));
+      }
+    };
+
+    script.onerror = function(){
+      cleanup();
+      reject(new Error('Could not connect to Google Sheets. Please try again.'));
+    };
+
+    var query = new URLSearchParams({
+      name: data.name,
+      mobile: data.mobile,
+      page: data.page,
+      submittedAt: data.submittedAt,
+      callback: callbackName
+    });
+    script.src = UCI_SHEET_WEB_APP_URL + (UCI_SHEET_WEB_APP_URL.indexOf('?') === -1 ? '?' : '&') + query.toString();
+    document.head.appendChild(script);
   });
 }
 
@@ -1135,8 +1163,13 @@ if(welcomeForm){
       page: window.location.href,
       submittedAt: new Date().toISOString()
     };
-    localStorage.setItem('uciVisitorName', leadData.name);
-    localStorage.setItem('uciVisitorMobile', leadData.mobile);
+    if(!leadData.name || leadData.name.length > 80){
+      if(welcomeStatus){
+        welcomeStatus.textContent = 'Please enter a valid name.';
+      }
+      visitorName.focus();
+      return;
+    }
 
     if(!UCI_SHEET_WEB_APP_URL){
       if(welcomeStatus){
@@ -1162,9 +1195,9 @@ if(welcomeForm){
         welcomeSubmit.disabled = false;
         welcomeSubmit.textContent = 'Continue';
       }
-    }).catch(function(){
+    }).catch(function(error){
       if(welcomeStatus){
-        welcomeStatus.textContent = 'Could not save. Please check deployment access.';
+        welcomeStatus.textContent = error.message;
       }
       if(welcomeSubmit){
         welcomeSubmit.disabled = false;
