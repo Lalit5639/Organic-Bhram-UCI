@@ -16,6 +16,16 @@ const locationStatus = document.getElementById("location-status");
 const mapLink = document.getElementById("map-link");
 const coordinatesInput = document.getElementById("coordinates");
 const orderStatus = document.getElementById("order-status");
+const onlinePayment = document.getElementById("online-payment");
+const upiTotalOutput = document.getElementById("upi-total");
+const paymentQr = document.getElementById("payment-qr");
+const paymentQrStatus = document.getElementById("payment-qr-status");
+const generatePaymentQrButton = document.getElementById("generate-payment-qr");
+const paymentReferenceInput = document.getElementById("payment-reference");
+const paymentMethodInputs = form.querySelectorAll('input[name="paymentMethod"]');
+
+const merchantUpiId = "bhramhoney@upi";
+const merchantName = "Bhram Honey";
 
 const requestedSize = new URLSearchParams(window.location.search).get("size");
 if (requestedSize && products[requestedSize]) sizeInput.value = requestedSize;
@@ -23,10 +33,79 @@ if (requestedSize && products[requestedSize]) sizeInput.value = requestedSize;
 function updateOrderTotal() {
   const product = products[sizeInput.value];
   const quantity = Number(quantityInput.value);
-  totalOutput.textContent = product && Number.isInteger(quantity) && quantity > 0
-    ? `₹${(product.price * quantity).toLocaleString("en-IN")}`
-    : "—";
+  const validTotal = product && Number.isInteger(quantity) && quantity > 0 && quantity <= 20
+    ? product.price * quantity
+    : null;
+  totalOutput.textContent = validTotal === null ? "—" : `₹${validTotal.toLocaleString("en-IN")}`;
+  upiTotalOutput.textContent = validTotal === null ? "—" : validTotal.toLocaleString("en-IN");
+  updateUpiPaymentLinks(validTotal);
+  if (onlinePayment.hidden === false) renderPaymentQr(validTotal);
 }
+
+function getUpiPaymentUrl(total) {
+  return `upi://pay?${new URLSearchParams({
+    pa: merchantUpiId,
+    pn: merchantName,
+    am: String(total),
+    cu: "INR",
+    tn: "Bhram Honey order"
+  })}`;
+}
+
+function updateUpiPaymentLinks(total) {
+  document.querySelectorAll(".upi-app-link").forEach((link) => {
+    const app = link.dataset.upiApp;
+    const appSchemes = {
+      gpay: "tez://upi/pay",
+      phonepe: "phonepe://pay",
+      paytm: "paytmmp://pay",
+      whatsapp: "upi://pay"
+    };
+    const upiUrl = total === null ? null : new URL(getUpiPaymentUrl(total));
+    const paymentUrl = upiUrl
+      ? `${appSchemes[app] || appSchemes.whatsapp}?${upiUrl.searchParams}`
+      : "#";
+    link.href = paymentUrl;
+    link.setAttribute("aria-disabled", String(total === null));
+  });
+}
+
+function renderPaymentQr(total) {
+  paymentQr.replaceChildren();
+  if (total === null) {
+    paymentQrStatus.textContent = "QR banane ke liye pack aur quantity check karein.";
+    return;
+  }
+  if (typeof QRCode === "undefined") {
+    paymentQrStatus.textContent = "QR library load nahi ho paayi. UPI app button use karein ya UPI ID manually enter karein.";
+    return;
+  }
+  new QRCode(paymentQr, {
+    text: getUpiPaymentUrl(total),
+    width: 180,
+    height: 180,
+    colorDark: "#123f30",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+  paymentQrStatus.textContent = `₹${total.toLocaleString("en-IN")} ke liye UPI QR tayyar hai. Payment app se scan karein.`;
+}
+
+paymentMethodInputs.forEach((input) => {
+  input.addEventListener("change", () => {
+    onlinePayment.hidden = input.value !== "Online UPI" || !input.checked;
+    paymentReferenceInput.required = !onlinePayment.hidden;
+    if (!onlinePayment.hidden) renderPaymentQr(products[sizeInput.value].price * Number(quantityInput.value));
+  });
+});
+generatePaymentQrButton.addEventListener("click", () => {
+  const product = products[sizeInput.value];
+  const quantity = Number(quantityInput.value);
+  const total = product && Number.isInteger(quantity) && quantity > 0 && quantity <= 20
+    ? product.price * quantity
+    : null;
+  renderPaymentQr(total);
+});
 
 sizeInput.addEventListener("change", updateOrderTotal);
 quantityInput.addEventListener("input", updateOrderTotal);
@@ -135,6 +214,10 @@ form.addEventListener("submit", (event) => {
     ? `https://www.google.com/maps?q=${coordinatesInput.value.replace(", ", ",")}`
     : "";
   const total = product.price * quantity;
+  const paymentMethod = String(formData.get("paymentMethod"));
+  const paymentLine = paymentMethod === "Online UPI"
+    ? `Online UPI (${merchantUpiId}) — Reference ID: ${String(formData.get("paymentReference")).trim()}`
+    : "Cash on Delivery (COD)";
   const orderReference = `BH-${Date.now().toString(36).toUpperCase()}`;
   const orderDate = new Date().toLocaleString("en-IN", {
     dateStyle: "medium",
@@ -157,7 +240,8 @@ form.addEventListener("submit", (event) => {
     `💰 *TOTAL: ₹${total.toLocaleString("en-IN")}*`,
     "",
     "💳 *PAYMENT*",
-    "Cash on Delivery (COD)",
+    paymentLine,
+    ...(paymentMethod === "Online UPI" ? [`Amount: ₹${total.toLocaleString("en-IN")}`, "Payment verification pending"] : []),
     "",
     "👤 *CUSTOMER*",
     `Name: ${String(formData.get("name")).trim()}`,

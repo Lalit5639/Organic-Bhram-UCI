@@ -238,6 +238,7 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
+  margin-bottom: 8px;
   padding: 14px;
   border: 1px solid #ead9a6;
   border-radius: 7px;
@@ -268,6 +269,131 @@
 .payment-note {
   margin: 9px 0 0;
   line-height: 1.5;
+}
+
+.online-payment {
+  margin-top: 14px;
+  padding: 15px;
+  border: 1px solid #dfe2d8;
+  border-radius: 8px;
+  background: #fbfcf8;
+}
+
+.online-payment[hidden] {
+  display: none;
+}
+
+.online-payment > .payment-note:first-child {
+  margin-top: 0;
+}
+
+.upi-app-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.upi-app-link {
+  padding: 10px 8px;
+  border: 1px solid #d5a532;
+  border-radius: 6px;
+  color: #123f30;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+.upi-app-link[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: .55;
+}
+
+.payment-qr-panel {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  margin: 14px 0;
+  padding: 14px;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.payment-qr {
+  display: grid;
+  min-width: 180px;
+  min-height: 180px;
+  place-items: center;
+}
+
+.payment-qr img,
+.payment-qr canvas {
+  max-width: 100%;
+}
+
+.payment-qr-status {
+  margin: 0;
+  color: #737b6d;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.qr-refresh-button {
+  padding: 8px 10px;
+  border: 0;
+  background: transparent;
+  color: #123f30;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.payment-terms {
+  margin: 0 0 20px;
+  padding: 15px;
+  border: 1px solid #e8e9e1;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.payment-terms h3 {
+  margin: 0 0 9px;
+  color: #123f30;
+  font-size: 13px;
+}
+
+.payment-terms ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 18px;
+  color: #737b6d;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.terms-accept {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 14px;
+  color: #354338;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.terms-accept input {
+  flex: 0 0 auto;
+  margin: 2px 0 0;
+  accent-color: #123f30;
+}
+
+.terms-accept b {
+  color: #a84837;
 }
 
 .order-submit {

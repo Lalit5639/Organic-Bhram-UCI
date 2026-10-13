@@ -62,10 +62,10 @@ function saveLead(data, callback) {
 
     sheet.appendRow([
       new Date(),
-      name,
-      mobile,
-      String(data.page || '').slice(0, 2048),
-      String(data.submittedAt || '').slice(0, 64)
+      toPlainSheetText(name, 80),
+      toPlainSheetText(mobile, 10),
+      toPlainSheetText(data.page, 2048),
+      toPlainSheetText(data.submittedAt, 64)
     ]);
 
     return createResponse({ok: true}, callback);
@@ -77,6 +77,11 @@ function saveLead(data, callback) {
       lock.releaseLock();
     }
   }
+}
+
+function toPlainSheetText(value, maxLength) {
+  const text = String(value || '').slice(0, maxLength);
+  return /^[\s\uFEFF]*[=+\-@]/.test(text) ? "'" + text : text;
 }
 
 function createResponse(payload, callback) {

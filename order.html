@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Bhram honey ka order dein. Delivery details bharein aur cash on delivery chunein.">
+  <meta name="description" content="Bhram honey ka order dein. Delivery details bharein aur COD ya UPI payment chunein.">
   <title>Order karein | Bhram™ Honey</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,8 +115,46 @@
             <input type="radio" name="paymentMethod" value="Cash on Delivery" checked>
             <span><strong>Cash on Delivery (COD)</strong><small>Parcel milne par cash payment karein.</small></span>
           </label>
-          <p class="payment-note">Filhaal Cash on Delivery available hai. UPI/QR payment UPI ID milne ke baad joda jayega.</p>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="Online UPI">
+            <span><strong>Online payment (UPI)</strong><small>Google Pay, PhonePe, Paytm ya WhatsApp Pay se payment karein.</small></span>
+          </label>
+
+          <div class="online-payment" id="online-payment" hidden>
+            <p class="payment-note">Neeche apna UPI app chunein, ya QR scan karke ₹<span id="upi-total">380</span> pay karein. WhatsApp Pay option supported device par UPI app chooser kholega. UPI ID: <strong>bhramhoney@upi</strong></p>
+            <div class="upi-app-links" aria-label="UPI payment apps">
+              <a class="upi-app-link" data-upi-app="gpay" href="#">Google Pay</a>
+              <a class="upi-app-link" data-upi-app="phonepe" href="#">PhonePe</a>
+              <a class="upi-app-link" data-upi-app="paytm" href="#">Paytm</a>
+              <a class="upi-app-link" data-upi-app="whatsapp" href="#">WhatsApp Pay</a>
+            </div>
+            <div class="payment-qr-panel">
+              <div id="payment-qr" class="payment-qr" role="img" aria-label="UPI payment QR code"></div>
+              <p id="payment-qr-status" class="payment-qr-status" role="status" aria-live="polite">QR code tayyar kiya ja raha hai…</p>
+              <button class="qr-refresh-button" id="generate-payment-qr" type="button">QR code generate / update karein</button>
+            </div>
+            <label class="form-field payment-reference">
+              <span>UPI transaction / reference ID <b>*</b></span>
+              <input id="payment-reference" name="paymentReference" type="text" maxlength="100" autocomplete="off" placeholder="Payment complete hone ke baad ID daalein">
+            </label>
+            <p class="payment-note">Payment ke baad UPI transaction/reference ID sambhal kar rakhein. Order WhatsApp par bhejne ke baad payment receipt verify hone par hi confirm hoga. Website payment status verify nahi karti.</p>
+          </div>
         </fieldset>
+
+        <section class="payment-terms" aria-labelledby="payment-terms-heading">
+          <h3 id="payment-terms-heading">Payment Terms &amp; Conditions</h3>
+          <ul>
+            <li>COD chunein to parcel receive karte waqt order ka total amount cash mein dein.</li>
+            <li>Online UPI chunein to screen par dikhaye gaye exact order amount ko <strong>bhramhoney@upi</strong> par pay karein. Extra payment PIN, OTP ya password kisi ke saath share na karein.</li>
+            <li>Online payment apne UPI app mein complete karke transaction/reference ID order form mein dena zaroori hai. Payment verify hone ke baad hi online order confirm hoga.</li>
+            <li>WhatsApp par order bhejna payment ya order confirmation nahi hai. Order details review karke WhatsApp mein Send karein.</li>
+            <li>Cancellation, refund ya order se judi madad ke liye isi WhatsApp order channel par sampark karein; aise requests lagu policy aur kanooni niyamon ke mutabik handle hongi.</li>
+          </ul>
+          <label class="terms-accept">
+            <input id="terms-accepted" name="termsAccepted" type="checkbox" required>
+            <span>Maine Payment Terms &amp; Conditions padh li hain aur unse sehmat hoon. <b>*</b></span>
+          </label>
+        </section>
 
         <button class="btn btn-primary order-submit" type="submit">WhatsApp par order bhejein <span aria-hidden="true">→</span></button>
         <p class="order-privacy">Aapki order details WhatsApp message mein khulengi. Review karke Send karein. Details website par save nahi hoti.</p>
@@ -126,6 +164,7 @@
   </main>
 
   <footer class="order-footer"><a href="index.html">BHRAM™</a> <span>•</span> Prakriti ki mithaas, dil se.</footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
   <script src="js/order.js"></script>
 </body>
 </html>
