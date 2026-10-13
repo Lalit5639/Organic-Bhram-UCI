@@ -6,7 +6,6 @@
 <title>UCI | Bhram™ Honey</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Serif+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/timeline.css">
-<link rel="stylesheet" href="css/order.css">
 <style>
 :root{
   --bg:#faf8f1;
@@ -248,15 +247,14 @@ nav{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:cente
 @keyframes processBottle{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 @keyframes processLab{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 @keyframes processScan{0%,100%{stroke-dashoffset:0;opacity:.45}50%{stroke-dashoffset:55;opacity:1}}
-#order{scroll-margin-top:96px}
-.order-page{background:#f8f4e7}
-.order-intro .eyebrow{color:var(--olive)}
-.order-intro h1 em{color:var(--olive)}
-.order-submit{background:var(--green);color:#fff}
 section{padding:34px 0}
 .headline{font-size:clamp(1.9rem,4vw,3rem);margin:0 0 18px;letter-spacing:-.05em}
 .subhead{color:var(--mut);margin:0 0 26px;max-width:760px}
-.product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:stretch;max-width:780px;margin:0 auto}
+.product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch;max-width:1120px;margin:0 auto}
+.see-more-products{display:flex;justify-content:center;margin-top:26px}
+.see-more-products .btn{gap:10px}
+.see-more-products .btn span{font-size:1.15em;transition:transform .2s ease}
+.see-more-products .btn:hover span{transform:translateX(3px)}
 .product-card{position:relative;display:flex;flex-direction:column;background:linear-gradient(180deg,#f6f1e7 0%,#f0e8d8 100%);border:1px solid rgba(76,98,82,.08);border-radius:20px;overflow:hidden;box-shadow:0 14px 28px rgba(40,49,38,.08);transition:transform .25s ease,box-shadow .25s ease}
 .product-card:hover{transform:translateY(-4px);box-shadow:0 20px 36px rgba(40,49,38,.12)}
 .product-card .img-box{position:relative;display:flex;align-items:center;justify-content:center;height:260px;padding:26px 12px 8px;background:linear-gradient(180deg,#f8f4ec 0%,#efe4c8 100%)}
@@ -357,7 +355,7 @@ footer:before{content:"";position:absolute;inset:0;background:radial-gradient(ci
   nav.menu-open{padding-bottom:14px}
   nav.menu-open .nav-item{display:flex}
   nav .nav-left .nav-item.active{grid-row:2;margin-top:6px}
-  nav .nav-left a[href="#products"]{grid-row:3}
+  nav .nav-left a[href="product.html"]{grid-row:3}
   nav .nav-left a[href="#about"]{grid-row:4}
   nav .nav-right a[href="#journey"]{grid-row:5}
   nav .nav-right a[href="#contact"]{grid-row:6}
@@ -411,6 +409,8 @@ footer:before{content:"";position:absolute;inset:0;background:radial-gradient(ci
   .add-btn{min-width:0;padding:8px 12px;font-size:.78rem}
 }
 @media(max-width:560px){
+  .product-grid{grid-template-columns:1fr;max-width:420px}
+  .product-card .img-box{height:230px}
   .farm-videos{padding:58px 0}
   .farm-videos-inner{width:calc(100% - 32px)}
   .farm-video-grid{grid-template-columns:1fr;gap:16px}
@@ -500,7 +500,7 @@ body.popup-lock{overflow:hidden}
       <div class="nav-left">
         <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav"><span>☰</span></button>
         <a class="nav-item active" href="#top"><span class="icon">⌂</span><span>Home</span></a>
-        <a class="nav-item" href="#products"><span class="icon">🛍</span><span>Products</span></a>
+        <a class="nav-item" href="product.html"><span class="icon">🛍</span><span>Products</span></a>
         <a class="nav-item" href="#about"><span class="icon">🍯</span><span>Bhram Honey</span></a>
       </div>
       <div class="brand-wrap" aria-label="UCI brand logo">
@@ -512,10 +512,7 @@ body.popup-lock{overflow:hidden}
       <div class="nav-right">
         <a class="nav-item" href="#journey"><span class="icon">🌾</span><span>Journey Beefarming</span></a>
         <a class="nav-item" href="#contact"><span class="icon">☎</span><span>Contact</span></a>
-        <button class="cart" id="cartBtn">
-          <span>Order Page</span>
-          <span class="cart-badge" id="cc">0</span>
-        </button>
+        <a class="cart" id="cartBtn" href="order.html"><span>Order Page</span></a>
       </div>
     </nav>
   </div>
@@ -553,7 +550,7 @@ body.popup-lock{overflow:hidden}
             <option value="2">1 किलोग्राम</option>
           </select>
         </div>
-        <a class="btn hero-order" href="#order">अभी ऑर्डर करें</a>
+        <a class="btn hero-order" id="heroOrderLink" href="order.html?size=250g">अभी ऑर्डर करें</a>
       </div>
     </div>
   </section>
@@ -597,13 +594,16 @@ body.popup-lock{overflow:hidden}
 
         <article class="product-card">
           <span class="product-badge is-muted">Fresh</span>
-          <div class="img-box"><img src="assets/4.png" alt="Bhram Dairy Pure Sars Oil"></div>
+          <div class="img-box"><img src="assets/6.png" alt="Bhram honey jar"></div>
           <div class="body">
-            <h3>Bhram Dairy Pure Sars Oil</h3>
-            <p class="status">1 KG / 1380 Rs.</p>
+            <h3>Bhram Honey</h3>
+            <p class="status">1 KG / ₹1,350</p>
             <a class="order-btn" href="order.html?size=1kg">अभी ऑर्डर करें</a>
           </div>
         </article>
+      </div>
+      <div class="see-more-products">
+        <a class="btn primary" href="product.html#packs">See More Products <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
@@ -828,110 +828,6 @@ body.popup-lock{overflow:hidden}
         </div>
       </div>
     </section> -->
-  <section class="order-page" id="order">
-    <div class="order-main">
-      <div class="order-intro">
-        <p class="eyebrow">UCI • BHRAM™ HONEY</p>
-        <h1>Apna order <em>place karein.</em></h1>
-        <p>Delivery details bharein aur order WhatsApp par bhejein.</p>
-      </div>
-      <form class="order-layout" id="order-form">
-        <section class="order-card customer-card" aria-labelledby="delivery-heading">
-          <div class="order-section-heading">
-            <span class="order-step">01</span>
-            <div><h2 id="delivery-heading">Delivery details</h2><p>Jis address par order chahiye, woh batayein.</p></div>
-          </div>
-
-          <label class="form-field">
-            <span>Aapka poora naam <b>*</b></span>
-            <input name="name" type="text" autocomplete="name" maxlength="100" placeholder="Jaise: Rahul Kumar" required>
-          </label>
-
-          <div class="form-row">
-            <label class="form-field">
-              <span>Mobile number <b>*</b></span>
-              <input name="phone" type="tel" inputmode="numeric" autocomplete="tel" pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10-digit mobile number" title="10 digit ka valid Indian mobile number daalein" required>
-            </label>
-            <label class="form-field">
-              <span>Username <small>(optional)</small></span>
-              <input name="username" type="text" autocomplete="username" maxlength="50" placeholder="Aapka username">
-            </label>
-          </div>
-
-          <label class="form-field">
-            <span>Poora address <b>*</b></span>
-            <textarea name="address" rows="3" autocomplete="street-address" maxlength="300" placeholder="House/flat no., gali, area" required></textarea>
-          </label>
-          <label class="form-field">
-            <span>Landmark <small>(optional)</small></span>
-            <input name="landmark" type="text" maxlength="120" placeholder="Paas ki koi pehchaan">
-          </label>
-
-          <div class="form-row">
-            <label class="form-field">
-              <span>PIN code <b>*</b></span>
-              <input id="postal-code" name="postalCode" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{6}" maxlength="6" placeholder="6-digit PIN code" required>
-            </label>
-            <label class="form-field">
-              <span>District <b>*</b></span>
-              <input id="district" name="district" type="text" autocomplete="address-level2" maxlength="100" placeholder="Aapka district" required>
-            </label>
-          </div>
-          <label class="form-field">
-            <span>State <b>*</b></span>
-            <input id="state" name="state" type="text" autocomplete="address-level1" maxlength="100" placeholder="Aapka state" required>
-          </label>
-
-          <div class="location-panel">
-            <div class="location-copy">
-              <strong>Current location pin</strong>
-              <span>GPS se location lein; district aur PIN code milne par fill ho jayenge.</span>
-            </div>
-            <button class="btn btn-location" id="location-button" type="button">Location lein <span aria-hidden="true">⌖</span></button>
-            <p id="location-status" class="location-status" role="status" aria-live="polite"></p>
-            <a id="map-link" class="map-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps par location dekhein ↗</a>
-            <input id="coordinates" name="coordinates" type="hidden">
-          </div>
-        </section>
-
-        <aside class="order-card summary-card" aria-labelledby="summary-heading">
-          <div class="order-section-heading">
-            <span class="order-step">02</span>
-            <div><h2 id="summary-heading">Order summary</h2><p>Pack aur quantity chunein.</p></div>
-          </div>
-
-          <label class="form-field">
-            <span>Honey pack <b>*</b></span>
-            <select id="product-size" name="productSize" required>
-              <option value="250g">250 g — ₹380</option>
-              <option value="500g">500 g — ₹690</option>
-              <option value="1kg">1 kg — ₹1,350</option>
-            </select>
-          </label>
-          <label class="form-field quantity-field">
-            <span>Quantity <b>*</b></span>
-            <input id="quantity" name="quantity" type="number" min="1" max="20" value="1" required>
-          </label>
-
-          <div class="price-total"><span>Total amount</span><strong id="order-total">₹380</strong></div>
-
-          <fieldset class="payment-choice">
-            <legend>Payment method</legend>
-            <label class="payment-option">
-              <input type="radio" name="paymentMethod" value="Cash on Delivery" checked>
-              <span><strong>Cash on Delivery (COD)</strong><small>Parcel milne par cash payment karein.</small></span>
-            </label>
-            <p class="payment-note">Filhaal Cash on Delivery available hai. UPI/QR payment UPI ID milne ke baad joda jayega.</p>
-          </fieldset>
-
-          <button class="btn btn-primary order-submit" type="submit">WhatsApp par order bhejein <span aria-hidden="true">→</span></button>
-          <p class="order-privacy">Aapki order details WhatsApp message mein khulengi. Review karke Send karein. Details website par save nahi hoti.</p>
-          <p id="order-status" class="order-status" role="status" aria-live="polite"></p>
-        </aside>
-      </form>
-    </div>
-  </section>
-
   <section id="about">
     <div class="w">
       <h2 class="headline">Why UCI chose Bhram™</h2>
@@ -1034,7 +930,7 @@ body.popup-lock{overflow:hidden}
         <h4>Explore</h4>
         <div class="footer-links">
           <a href="#top">Home</a>
-          <a href="#products">Products</a>
+          <a href="product.html">Products</a>
           <a href="#journey">Journey</a>
           <a href="#about">About</a>
         </div>
@@ -1043,10 +939,10 @@ body.popup-lock{overflow:hidden}
       <div class="footer-column">
         <h4>Products</h4>
         <div class="footer-links">
-          <a href="#products">250 g Pack</a>
-          <a href="#products">500 g Pack</a>
-          <a href="#products">1 kg Family Pack</a>
-          <a href="#order">Order Now</a>
+          <a href="product.html#packs">250 g Pack</a>
+          <a href="product.html#packs">500 g Pack</a>
+          <a href="product.html#packs">1 kg Family Pack</a>
+          <a href="order.html">Order Now</a>
         </div>
       </div>
 
@@ -1057,7 +953,7 @@ body.popup-lock{overflow:hidden}
           <a href="https://wa.me/919027330373"><span>WhatsApp</span> +91 90273 30373</a>
           <a href="mailto:hello@uci.com"><span>Email</span> hello@uci.com</a>
         </div>
-        <a class="footer-cta" href="#order">Place Order</a>
+        <a class="footer-cta" href="order.html">Place Order</a>
       </div>
     </div>
 
@@ -1183,15 +1079,13 @@ if(welcomeForm){
   });
 }
 
-var count = 0;
-var cartBtn = document.getElementById('cartBtn');
-var cc = document.getElementById('cc');
-var addButtons = document.querySelectorAll('.add-btn');
 var nav = document.getElementById('primary-nav');
 var menuBtn = document.getElementById('menuBtn');
 var heroSize = document.getElementById('heroSize');
 var heroPrice = document.getElementById('heroPrice');
+var heroOrderLink = document.getElementById('heroOrderLink');
 var packPrices = ['₹380 / 250 ग्राम', '₹690 / 500 ग्राम', '₹1,350 / 1 किलोग्राम'];
+var packSizes = ['250g', '500g', '1kg'];
 
 menuBtn.addEventListener('click', function(){
   var isOpen = nav.classList.toggle('menu-open');
@@ -1213,6 +1107,7 @@ function setPack(index){
   var selectedIndex = (index + packPrices.length) % packPrices.length;
   heroSize.value = String(selectedIndex);
   heroPrice.textContent = packPrices[selectedIndex];
+  heroOrderLink.href = 'order.html?size=' + packSizes[selectedIndex];
 }
 
 heroSize.addEventListener('change', function(){
@@ -1223,33 +1118,6 @@ document.getElementById('previousPack').addEventListener('click', function(){
 });
 document.getElementById('nextPack').addEventListener('click', function(){
   setPack(Number(heroSize.value) + 1);
-});
-
-addButtons.forEach(function(button){
-  button.addEventListener('click', function(){
-    document.getElementById('product-size').value = button.getAttribute('data-size');
-    document.getElementById('product-size').dispatchEvent(new Event('change', {bubbles:true}));
-    document.getElementById('quantity').value = '1';
-    document.getElementById('quantity').dispatchEvent(new Event('input', {bubbles:true}));
-    count = 1;
-    cc.textContent = count;
-    document.getElementById('order').scrollIntoView({behavior:'smooth'});
-  });
-});
-
-cartBtn.addEventListener('click', function(){
-  document.getElementById('order').scrollIntoView({behavior:'smooth'});
-});
-
-heroSize.addEventListener('change', function(){
-  var sizes = ['250g', '500g', '1kg'];
-  document.getElementById('product-size').value = sizes[Number(heroSize.value)];
-  document.getElementById('product-size').dispatchEvent(new Event('change', {bubbles:true}));
-});
-
-document.getElementById('quantity').addEventListener('input', function(){
-  count = Number(this.value) || 0;
-  cc.textContent = count;
 });
 
 var timeline = document.getElementById('honey-timeline');
@@ -1439,6 +1307,5 @@ if(reducedMotion && reducedMotion.addEventListener){
 showScene(0);
 updateProcessTimer();
 </script>
-<script src="js/order.js"></script>
 </body>
 </html>

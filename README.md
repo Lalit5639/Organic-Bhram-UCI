@@ -2,6 +2,7 @@
 
 ## Included
 - Premium responsive homepage
+- Dedicated responsive Bhram™ product page with 250 g / 500 g / 1 kg pack ordering
 - Bhram™ hero product using the supplied product image
 - Product sizes: 250g / 500g / 1kg
 - Customer order form with delivery address, PIN/district lookup, optional current map pin, Cash on Delivery and UPI payments
